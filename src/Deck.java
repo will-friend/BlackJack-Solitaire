@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class Deck {
 
@@ -10,18 +12,30 @@ public class Deck {
             int rank = (i % 13) + 1;
             int suit = i / 13;
             if (suit == 0) {
-                cards.add(new Card("Heart", rank));
+                this.cards.add(new Card("Heart", rank));
             } else if (suit == 1) {
-                cards.add(new Card("Spade", rank));
+                this.cards.add(new Card("Spade", rank));
             } else if (suit == 2) {
-                cards.add(new Card("Club", rank));
+                this.cards.add(new Card("Club", rank));
             } else {
-                cards.add(new Card("Diamond", rank));
+                this.cards.add(new Card("Diamond", rank));
             }
         }
     }
 
-    public void shuffleDeck() {
-        
+    public ArrayList<Card> getCards() {
+        return this.cards;
     }
+
+    public void shuffleDeck() {
+        Random random = new Random(123);
+        Collections.shuffle(this.cards, random);
+    }
+
+    public Card getTopCard() {
+        Card topCard = this.cards.getLast();
+        topCard.setPlayed(true);
+        return topCard;
+    }
+
 }
