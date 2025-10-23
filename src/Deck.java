@@ -38,4 +38,23 @@ public class Deck {
         return topCard;
     }
 
+    public static void main(String[] args) {
+
+        Deck deck = new Deck();
+        ArrayList<Card> cards = deck.getCards();
+
+        System.out.println("Pre-Shuffle deck");
+        for (Card card : cards) {
+            System.out.println(card.toString());
+        }
+
+        deck.shuffleDeck();
+        System.out.println("Post-Shuffle deck");
+        cards = deck.getCards();
+        for (Card card : cards) {
+            System.out.println(card.toString());
+        }
+        System.out.println("Top card: " + deck.getTopCard());
+    }
+
 }
