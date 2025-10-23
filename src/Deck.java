@@ -2,10 +2,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ *  Class that defines a regular deck of cards, and actions that can
+ *  be taken with the deck
+ */
 public class Deck {
 
     private ArrayList<Card> cards;
 
+    /**
+     * Constructor that will initialize the cards arraylist, and iteratively
+     * populate it with the 52 Card objects representing the 52 cards found
+     * in a standard playing deck
+     */
     public Deck() {
         this.cards = new ArrayList<Card>();
         for (int i = 0; i < 52; i++) {
@@ -23,15 +32,29 @@ public class Deck {
         }
     }
 
+    /**
+     * Method to allow user to get the current state of the cards field
+     *
+     * @return The current state of the cards field
+     */
     public ArrayList<Card> getCards() {
         return this.cards;
     }
 
+    /**
+     * Method to shuffle elements of card field in place, emulating the
+     * shuffling of a deck of cards in real life
+     */
     public void shuffleDeck() {
         Random random = new Random(123);
         Collections.shuffle(this.cards, random);
     }
 
+    /**
+     * Allow user to get the last element in the cards field, emulating
+     * drawing the top card from a deck of cards
+     * @return Last element from the cards field of Deck object
+     */
     public Card getTopCard() {
         Card topCard = this.cards.getLast();
         topCard.setPlayed(true);
