@@ -42,7 +42,7 @@ public class Board {
                     if (board[i][j] != null) {
                         System.out.print(board[i][j].toString()+"   ");
                     } else {
-                        System.out.printf("%2d   ", (board[i].length*i) + j);
+                        System.out.printf("%2d   ", (board[i].length*i) + j + 1);
                     }
                 }
             }
@@ -59,7 +59,7 @@ public class Board {
                 if (board[i][j] != null) {
                     System.out.print(board[i][j].toString()+"   ");
                 } else {
-                    System.out.printf("%2d   ", col);
+                    System.out.printf("%2d   ", col+1);
                 }
             }
             System.out.println();
