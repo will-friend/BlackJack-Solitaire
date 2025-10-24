@@ -12,9 +12,27 @@ public class BlackjackSolitaire {
     }
 
     public int sumScore() {
-        int sum = 0;
+        int rowSum = 0;
+        int colSum = 0;
         int aceCount = 0;
-        ArrayList<Integer> sumArr = new ArrayList<Integer>();
+        Card[][] gameBoard = board.getBoard();
+        for (int i = 0; i < gameBoard.length; i++) {
+            int handScore = 0;
+            for (int j = 0; j < gameBoard[i].length; j++) {
+                if (gameBoard[i][j] == null) {
+                    continue;
+                } else if (gameBoard[i][j].getValue() == 1) {
+                    if (aceCount == 0 && handScore <= 10) {
+                        aceCount++;
+                        handScore += 11;
+                    } else if (aceCount >= 1) {
+                        handScore += 1;
+                    } else {
+                        handScore += gameBoard[i][j].getValue();
+                    }
+                }
+            }
+        }
         return 0;
     }
 
