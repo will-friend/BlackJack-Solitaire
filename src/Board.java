@@ -14,6 +14,14 @@ public class Board {
         board = new Card[4][5];
     }
 
+    public int length() {
+        return board.length;
+    }
+
+    public int width() {
+        return board[0].length;
+    }
+
     /**
      * Method to allow user to get the board field
      * @return current board object state
@@ -67,6 +75,7 @@ public class Board {
      * Method to display the current game board to the console
      */
     public void printBoard() {
+        int count = 1;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if ((i == 2 || i == 3) && (j == 0 || j == 4)) {
@@ -75,8 +84,9 @@ public class Board {
                     if (board[i][j] != null) {
                         System.out.print(board[i][j].toString()+"   ");
                     } else {
-                        System.out.printf("%2d   ", (board[i].length*i) + j + 1);
+                        System.out.printf("%2d   ", count);
                     }
+                    count++;
                 }
             }
             System.out.println();
@@ -88,6 +98,7 @@ public class Board {
      */
     public void printDiscard() {
         int[][] discardIdx = {{10, 14}, {15, 19}};
+        int tile_print = 17;
         for (int[] row : discardIdx) {
             for (int col : row) {
                 int i = col / board[0].length;
@@ -95,8 +106,9 @@ public class Board {
                 if (board[i][j] != null) {
                     System.out.print(board[i][j].toString()+"   ");
                 } else {
-                    System.out.printf("%2d   ", col+1);
+                    System.out.printf("%2d   ", tile_print);
                 }
+                tile_print++;
             }
             System.out.println();
         }
