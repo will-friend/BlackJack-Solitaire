@@ -12,14 +12,15 @@ public class BlackjackSolitaire {
     }
 
     public int sumScore() {
-        int rowSum = 0;
-        int colSum = 0;
+        int gameSum = 0;
         int aceCount = 0;
         Card[][] gameBoard = board.getBoard();
         for (int i = 0; i < gameBoard.length; i++) {
             int handScore = 0;
             for (int j = 0; j < gameBoard[i].length; j++) {
-                if (gameBoard[i][j] == null) {
+                if (gameBoard[i][j] == null)  {
+                    continue;
+                } else if (((i == gameBoard.length - 1 || i == gameBoard.length - 2)) && ((j == gameBoard[0].length - 1) || (j == 0))) {
                     continue;
                 } else if (gameBoard[i][j].getValue() == 1) {
                     if (aceCount == 0 && handScore <= 10) {
@@ -32,8 +33,27 @@ public class BlackjackSolitaire {
                     }
                 }
             }
+            if (handScore > 21 && aceCount >= 1) {
+                handScore -= 10;
+            }
+            gameSum += scoreHand(handScore, false);
         }
-        return 0;
+        return gameSum;
+    }
+
+    private int scoreHand(int handScore, boolean blackjack) {
+        if (handScore == 21) {
+            if (blackjack) {
+                return 10;
+            }
+            return 7;
+        } else if (handScore > 16 && handScore < 21) {
+            return handScore - 15;
+        } else if (handScore <= 16) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public boolean isBoardFull() {
