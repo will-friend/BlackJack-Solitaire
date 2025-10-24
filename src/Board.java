@@ -1,23 +1,53 @@
+/**
+ * Class that defines the playing board/grid and the discard
+ * board/grid
+ */
+
 public class Board {
     private Card[][] board;
 
+    /**
+     * Costume no input constructor to initialize board field
+     * with proper dimensions
+     */
     public Board() {
         board = new Card[4][5];
     }
 
+    /**
+     * Method to allow user to get the board field
+     * @return current board object state
+     */
     public Card[][] getBoard() {
         return board;
     }
 
+    /**
+     * Method allowing player to place a card on empty space on regular game board
+     * @param row row index of board
+     * @param col column index of board
+     * @param card card object to be placed onto the board
+     * @return boolean flag indicating whether card was placed or not
+     */
     public boolean placeCard(int row, int col, Card card) {
         if ((row == 2 || row == 3) && (col == 0 || col == 4)) {
             System.out.println("Cannot place tile in discard slot, please enter a valid slot.");
             return false;
         }
-        this.board[row][col] = card;
+        if (board[row][col] == null) {
+            board[row][col] = card;
+            System.out.println("Placed card: " + card);
+        }
         return true;
     }
 
+    /**
+     * Method allowing player to place a card on empty space in discard board
+     * @param row row index of board
+     * @param col column index of board
+     * @param card card object to be placed onto the board
+     * @return boolean flag indicating whether card was discarded or not
+     */
     public boolean discardCard(int row, int col, Card card) {
 
         if (board[2][0] != null && board[2][4] != null && board[3][0] != null && board[3][4] != null) {
@@ -33,6 +63,9 @@ public class Board {
         return false;
     }
 
+    /**
+     * Method to display the current game board to the console
+     */
     public void printBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -50,6 +83,9 @@ public class Board {
         }
     }
 
+    /**
+     * method to display discard grid to console
+     */
     public void printDiscard() {
         int[][] discardIdx = {{10, 14}, {15, 19}};
         for (int[] row : discardIdx) {
@@ -66,6 +102,10 @@ public class Board {
         }
     }
 
+    /**
+     * testing bed
+     * @param args
+     */
     public static void main(String[] args) {
         Board board = new Board();
         System.out.println("Board:");
