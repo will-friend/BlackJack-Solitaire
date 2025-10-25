@@ -61,6 +61,8 @@ public class Board {
         int row = 0;
         if (tileNum == 17 || tileNum == 18) {
             row = (tileNum - board[0].length) / board[0].length;
+        } else if (tileNum == 14 || tileNum == 15) {
+            row = (tileNum + 1) / board[0].length;
         } else {
             row = (tileNum - 1) / this.board[0].length;
         }
@@ -69,8 +71,7 @@ public class Board {
 
     /**
      * Method allowing player to place a card on empty space on regular game board
-     * @param row row index of board
-     * @param col column index of board
+     * @param tileNum tile number player chose to enter
      * @param card card object to be placed onto the board
      * @return boolean flag indicating whether card was placed or not
      */
@@ -83,7 +84,10 @@ public class Board {
             System.out.println("Cannot place tile in discard slot, please enter a valid slot.");
             return false;
         }
-        if (board[row][col] == null) {
+        if (board[row][col] != null) {
+            System.out.println("Card already placed here, please choose another spot.");
+            return false;
+        } else {
             board[row][col] = card;
             System.out.println("Placed card: " + card);
         }
@@ -92,8 +96,7 @@ public class Board {
 
     /**
      * Method allowing player to place a card on empty space in discard board
-     * @param row row index of board
-     * @param col column index of board
+     * @param tileNum tile number player chose to enter
      * @param card card object to be placed onto the board
      * @return boolean flag indicating whether card was discarded or not
      */
@@ -123,7 +126,7 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if ((i == 2 || i == 3) && (j == 0 || j == 4)) {
-                    System.out.print("      ");
+                    System.out.print("     ");
                 } else {
                     if (board[i][j] != null) {
                         System.out.print(board[i][j].toString()+"   ");
@@ -172,7 +175,7 @@ public class Board {
         Card c1 = new Card("Heart", 3);
         Card c2 = new Card("Diamond", 2);
 
-        board.placeCard(1, c1);
+        board.placeCard(14, c1);
         board.discardCard(18, c2);
         System.out.println("Board:");
         board.printBoard();

@@ -28,12 +28,13 @@ public class BlackjackSolitaire {
                     if (aceCount == 0 && handScore <= 10) {
                         aceCount++;
                         handScore += 11;
-                    } else if (aceCount >= 1) {
-                        handScore += 1;
                     } else {
-                        handScore += gameBoard[i][j].getValue();
+                        handScore += 1;
                     }
+                } else {
+                    handScore += gameBoard[i][j].getValue();
                 }
+
             }
             if (handScore > 21 && aceCount >= 1) {
                 handScore -= 10;
@@ -53,11 +54,11 @@ public class BlackjackSolitaire {
                     if (aceCount == 0 && handScore <= 10) {
                         aceCount++;
                         handScore += 11;
-                    } else if (aceCount >= 1) {
-                        handScore += 1;
                     } else {
-                        handScore += gameBoard[i][j].getValue();
+                        handScore += 1;
                     }
+                } else {
+                        handScore += gameBoard[i][j].getValue();
                 }
             }
             if (handScore > 21 && aceCount >= 1) {
@@ -103,21 +104,25 @@ public class BlackjackSolitaire {
 
     public void play() {
         System.out.println("Let's play Blackjack Solitaire! Below you can find the layout of the game:");
+        System.out.println();
+        System.out.println("Playing Board:");
         this.board.printBoard();
+        System.out.println("Discard Board:");
         this.board.printDiscard();
-        System.out.println("There are two boards above: the Playing Board, and the Discard Board. Each board is " +
-                "labeled with a number indicating a position on either board. When presented with a new card, a player" +
-                "has two choice: to play the card, or to discard the card. A player must (when prompted) the space they" +
-                " want to play (or discard) the card too. Depending on the action chosen, the game will either " +
-                "confirm that the card can be played, or inform the player that there move is invalid and they must choose " +
+        System.out.println("There are two boards above: the Playing Board, and the Discard Board. Each board is \n" +
+                "labeled with a number indicating a position on either board. When presented with a new card, a player\n" +
+                "has two choice: to play the card, or to discard the card. A player must (when prompted) the space they\n" +
+                " want to play (or discard) the card too. Depending on the action chosen, the game will either \n" +
+                "confirm that the card can be played, or inform the player that there move is invalid and they must choose \n" +
                 "a new action.\n" +
-                "The goal of the game is to place (or discard) each new card presented, trying to get a sum of 21 on any row or " +
-                "column of the game board. The game ends only when the board is completely filled. A player gets a total of four" +
+                "The goal of the game is to place (or discard) each new card presented, trying to get a sum of 21 on any row or \n" +
+                "column of the game board. The game ends only when the board is completely filled. A player gets a total of four\n" +
                 "discards per game (represented by the 2x2 discard grid). Let's start\n\n\n"
         );
         int disCards = 4;
         while (!this.isBoardFull()) {
             Card topCard = deck.getTopCard();
+            System.out.println();
             System.out.println("Drawn Card: " + topCard.toString());
             System.out.println("Game Board:");
             board.printBoard();
@@ -127,7 +132,7 @@ public class BlackjackSolitaire {
             boolean tilePlaced = false;
 
             do {
-                System.out.println("Please select the tile you would like to play the card on (1-16 on the game board, 17-20 for discard): ");
+                System.out.println("Please select the tile you would like to play the drawn card on (1-16 on the game board, 17-20 for discard): ");
                 int tile = sc.nextInt();
                 if (tile >= 1 && tile <= 16) {
                     tilePlaced = board.placeCard(tile, topCard);
@@ -140,6 +145,7 @@ public class BlackjackSolitaire {
                 } else {
                     System.out.println("Invalid tile number, please reference board and try again.");
                 }
+                System.out.println();
 
             } while (!tilePlaced);
 

@@ -57,6 +57,7 @@ public class Deck {
      */
     public Card getTopCard() {
         Card topCard = this.cards.getLast();
+        this.cards.remove(topCard);
         topCard.setPlayed(true);
         return topCard;
     }
