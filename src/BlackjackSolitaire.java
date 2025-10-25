@@ -29,9 +29,12 @@ public class BlackjackSolitaire {
      * @return
      */
     private int sumScore() {
+
         int gameSum = 0;
         int aceCount = 0;
         Card[][] gameBoard = board.getBoard();
+
+        // Row hand scores
         for (int i = 0; i < gameBoard.length; i++) {
             int handScore = 0;
             for (int j = 0; j < gameBoard[i].length; j++) {
@@ -49,7 +52,6 @@ public class BlackjackSolitaire {
                 } else {
                     handScore += gameBoard[i][j].getValue();
                 }
-
             }
             if (handScore > 21 && aceCount >= 1) {
                 handScore -= 10;
@@ -58,6 +60,7 @@ public class BlackjackSolitaire {
             aceCount = 0;
         }
 
+        // Column hand scores
         for (int j = 0; j < gameBoard[0].length; j++) {
             int handScore = 0;
             for (int i = 0; i < gameBoard.length; i++) {
@@ -73,7 +76,7 @@ public class BlackjackSolitaire {
                         handScore += 1;
                     }
                 } else {
-                        handScore += gameBoard[i][j].getValue();
+                    handScore += gameBoard[i][j].getValue();
                 }
             }
             if (handScore > 21 && aceCount >= 1) {
@@ -86,7 +89,6 @@ public class BlackjackSolitaire {
             }
             aceCount = 0;
         }
-
         return gameSum;
     }
 
