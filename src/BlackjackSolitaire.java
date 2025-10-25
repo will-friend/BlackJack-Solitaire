@@ -121,7 +121,12 @@ public class BlackjackSolitaire {
         Card[][] gameBoard = this.board.getBoard();
         for (int i = 0; i < this.board.length(); i++) {
             for (int j = 0; j < this.board.width(); j++) {
-                if ((i < 2 && (j > 0 && j < 4)) && gameBoard[i][j] == null) {
+                if (i >= 2) {
+                    if (j == 0 || j == 4) {
+                        continue;
+                    }
+                }
+                if (gameBoard[i][j] == null) {
                     return false;
                 }
             }
@@ -184,7 +189,9 @@ public class BlackjackSolitaire {
 
         int gameScore = sumScore();
 
-        System.out.println("Game has finished!\nGame Score: " + gameScore);
+        System.out.println("Final Game Board:");
+        board.printBoard();
+        System.out.println("\nGame has finished!\nGame Score: " + gameScore);
 
 
 
