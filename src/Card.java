@@ -1,3 +1,7 @@
+/**
+ * Card class defines the properties of a playing card in a standard 52-card deck
+ * of cards
+ */
 public class Card {
     /*
     * Set the private fields of the Card class
@@ -12,7 +16,11 @@ public class Card {
     private boolean played;
     private final int rank;
 
-    // Two input constructor, taking the suit and the rank of the card
+    /**
+     * Two input constructor, taking the suit and the rank of the card
+     * @param suit suit (Heart, club, spade, diamond) of the playing card
+     * @param rank rank of the card in the deck, with ace=1 and king=13
+     */
     public Card(String suit, int rank) {
         this.suit = suit;
         this.rank = rank;
@@ -25,29 +33,35 @@ public class Card {
         }
     }
 
-    // Method to indicate whether the card has been played (placed or discarded)
-    public void setPlayed(boolean played) {
-        this.played = played;
-    }
-
-    // Allow user to retrieve played status of a card (true if it has been played
-    public boolean getPlayed() {
-        return this.played;
-    }
-
-    // Allow user to retrieve value of the card
+    /**
+     * Allow user to retrieve value of the card
+     * @return Default value of the card
+     */
     public int getValue() {
         return this.value;
     }
 
-    // Reassign ace to alternate value of 11
+    /**
+     * Set card status to true, indicating it has been placed
+     * @param played boolean indicating whether a card has been played or not
+     */
+    public void setPlayed(boolean played) {
+        this.played = played;
+    }
+
+    /**
+     * Reassign ace to alternate value of 11
+     */
     public void assignAceMax() {
         if (this.rank == 1) {
             this.value = 11;
         }
     }
 
-    // Custom toString method to allow for easily readable display of game state
+    /**
+     * Custom toString method to allow for easily readable display of game state
+     * @return string representation of playing card
+     */
     public String toString() {
         if (this.rank < 10 && this.rank > 1) {
             return this.rank + this.suit.substring(0,1);
@@ -62,6 +76,10 @@ public class Card {
         }
     }
 
+    /**
+     * test bed
+     * @param args default main arguments
+     */
     public static void main(String[] args) {
         Card c1 = new Card("Heart", 1);
         Card c2 = new Card("Club", 12);

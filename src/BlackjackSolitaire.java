@@ -1,19 +1,34 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class defining the blackjack solitaire game
+ */
 public class BlackjackSolitaire {
-
+    /*
+     * Set the private fields of the BlackjackSolitaire class
+     * Three private fields considers:
+     * - deck (Deck): Deck object defining the playing card deck to be played with
+     * - board (Board): Board object defining playing and discard boards
+     * - sc (Scanner): scanner for getting user input from console for gameplay
+     * */
     private Deck deck;
     private Board board;
     static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Custom no argument constructor, initializing class fields, and shuffling the deck of cards
+     */
     public BlackjackSolitaire() {
         this.deck = new Deck();
         this.deck.shuffleDeck();
         this.board = new Board();
     }
 
-    public int sumScore() {
+    /**
+     * Method to get the final score from the full board
+     * @return
+     */
+    private int sumScore() {
         int gameSum = 0;
         int aceCount = 0;
         Card[][] gameBoard = board.getBoard();
@@ -75,6 +90,13 @@ public class BlackjackSolitaire {
         return gameSum;
     }
 
+    /**
+     * Method to calculate what the value of a given "hand" is (filled out column
+     * or row on the board)
+     * @param handScore sum of cards in the provided hand
+     * @param blackjack boolean flag indicating whether hand is in 2 card column (eligible for blackjack)
+     * @return Point value of hand in game of blackjack solitaire
+     */
     private int scoreHand(int handScore, boolean blackjack) {
         if (handScore == 21) {
             if (blackjack) {
@@ -90,6 +112,11 @@ public class BlackjackSolitaire {
         }
     }
 
+    /**
+     * Method to check if solitaire board (not including discard slots)
+     * is full
+     * @return boolean indicating if board has been filled yet or not
+     */
     public boolean isBoardFull() {
         Card[][] gameBoard = this.board.getBoard();
         for (int i = 0; i < this.board.length(); i++) {
@@ -102,6 +129,9 @@ public class BlackjackSolitaire {
         return true;
     }
 
+    /**
+     * Method that carries out the actual gameplay of blackjack solitaire
+     */
     public void play() {
         System.out.println("Let's play Blackjack Solitaire! Below you can find the layout of the game:");
         System.out.println();
@@ -109,16 +139,17 @@ public class BlackjackSolitaire {
         this.board.printBoard();
         System.out.println("Discard Board:");
         this.board.printDiscard();
-        System.out.println("There are two boards above: the Playing Board, and the Discard Board. Each board is \n" +
-                "labeled with a number indicating a position on either board. When presented with a new card, a player\n" +
-                "has two choice: to play the card, or to discard the card. A player must (when prompted) the space they\n" +
-                " want to play (or discard) the card too. Depending on the action chosen, the game will either \n" +
-                "confirm that the card can be played, or inform the player that there move is invalid and they must choose \n" +
-                "a new action.\n" +
-                "The goal of the game is to place (or discard) each new card presented, trying to get a sum of 21 on any row or \n" +
-                "column of the game board. The game ends only when the board is completely filled. A player gets a total of four\n" +
-                "discards per game (represented by the 2x2 discard grid). Let's start\n\n\n"
+        System.out.println("\nThere are two boards above: the Playing Board, and the Discard Board. Each board is \n" +
+                "labeled with a number indicating a position on either board. When presented with a new card, \n" +
+                "a player has two choice: to play the card, or to discard the card. A player must (when prompted)\n" +
+                "the space they want to play (or discard) the card too. Depending on the action chosen, the game\n" +
+                "will either confirm that the card can be played, or inform the player that there move is invalid \n" +
+                "and they must choose a new action. The goal of the game is to place (or discard) each new card \n" +
+                "presented, trying to get a sum of 21 on any row or column of the game board. The game ends only\n" +
+                "when the board is completely filled. A player gets a total of four discards per game (represented \n" +
+                "by the 2x2 discard grid). When you are ready, hit enter to start!\n\n\n"
         );
+        sc.nextLine();
         int disCards = 4;
         while (!this.isBoardFull()) {
             Card topCard = deck.getTopCard();

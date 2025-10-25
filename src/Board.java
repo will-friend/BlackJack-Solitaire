@@ -4,6 +4,11 @@
  */
 
 public class Board {
+    /*
+     * Set the private field of the Board class
+     * One private fields considers:
+     * - board (Card[][]): 2D-Array of Card objects
+     * */
     private Card[][] board;
 
     /**
@@ -14,14 +19,6 @@ public class Board {
         board = new Card[4][5];
     }
 
-    public int length() {
-        return board.length;
-    }
-
-    public int width() {
-        return board[0].length;
-    }
-
     /**
      * Method to allow user to get the board field
      * @return current board object state
@@ -30,6 +27,29 @@ public class Board {
         return board;
     }
 
+    /**
+     * Method to get the length of the board
+     * @return length of the board
+     */
+    public int length() {
+        return board.length;
+    }
+
+    /**
+     * Method to get the width of the board
+     * @return width of the board
+     */
+    public int width() {
+        return board[0].length;
+    }
+
+    /**
+     * Method to get the proper column value in 2D-Array board for user provided
+     * tile input
+     * @param tileNum user inputted tile number
+     * @param row calculated row value based on tileNum
+     * @return column index in 2D-Array class field board
+     */
     private int getColumn(int tileNum, int row) {
 
         int col = 0;
@@ -52,11 +72,14 @@ public class Board {
                 col = (tileNum+2) % this.board[0].length;
             }
         }
-
         return col;
-
     }
 
+    /**
+     * Method to calculate proper row value given user inputted tile location
+     * @param tileNum user inputted tile location on board
+     * @return row index value
+     */
     private int getRow(int tileNum) {
         int row = 0;
         if (tileNum == 17 || tileNum == 18) {
@@ -163,7 +186,7 @@ public class Board {
 
     /**
      * testing bed
-     * @param args
+     * @param args main default args
      */
     public static void main(String[] args) {
         Board board = new Board();

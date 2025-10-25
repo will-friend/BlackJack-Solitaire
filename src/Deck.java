@@ -7,7 +7,11 @@ import java.util.Random;
  *  be taken with the deck
  */
 public class Deck {
-
+    /*
+     * Set the private field of the Deck class
+     * One private fields considers:
+     * - cards (ArrayList<Card>): Array list of Card objects
+     * */
     private ArrayList<Card> cards;
 
     /**
@@ -62,6 +66,10 @@ public class Deck {
         return topCard;
     }
 
+    /**
+     * Test bed
+     * @param args default main args
+     */
     public static void main(String[] args) {
 
         Deck deck = new Deck();
