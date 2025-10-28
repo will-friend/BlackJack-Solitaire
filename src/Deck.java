@@ -50,8 +50,9 @@ public class Deck {
      * shuffling of a deck of cards in real life
      */
     public void shuffleDeck() {
-        Random random = new Random(123);
-        Collections.shuffle(this.cards, random);
+//        Random random = new Random(123);
+//        Collections.shuffle(this.cards, random);
+        Collections.shuffle(this.cards);
     }
 
     /**
