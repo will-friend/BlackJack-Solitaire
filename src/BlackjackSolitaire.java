@@ -26,7 +26,7 @@ public class BlackjackSolitaire {
 
     /**
      * Method to get the final score from the full board
-     * @return
+     * @return sum of the total boards current score
      */
     private int sumScore() {
 
@@ -38,11 +38,11 @@ public class BlackjackSolitaire {
         for (int i = 0; i < gameBoard.length; i++) {
             int handScore = 0;
             for (int j = 0; j < gameBoard[i].length; j++) {
-                if (gameBoard[i][j] == null)  {
+                if (gameBoard[i][j] == null)  { // allow for mud game score report
                     continue;
-                } else if (((i == gameBoard.length - 1 || i == gameBoard.length - 2)) && ((j == gameBoard[0].length - 1) || (j == 0))) {
+                } else if (((i == gameBoard.length - 1 || i == gameBoard.length - 2)) && ((j == gameBoard[0].length - 1) || (j == 0))) { // ignore discard pile
                     continue;
-                } else if (gameBoard[i][j].getValue() == 1) {
+                } else if (gameBoard[i][j].getValue() == 1) { // account for aces (automatically make first ace worth 11, and any additional in row worth one, while tracking number of aces in the row)
                     if (aceCount == 0 && handScore <= 10) {
                         aceCount++;
                         handScore += 11;
@@ -53,7 +53,7 @@ public class BlackjackSolitaire {
                     handScore += gameBoard[i][j].getValue();
                 }
             }
-            if (handScore > 21 && aceCount >= 1) {
+            if (handScore > 21 && aceCount >= 1) { // if the score is a bust and we had 1 or more aces, subtract 10 from hand sum to set the first ace value to 1
                 handScore -= 10;
             }
             gameSum += scoreHand(handScore, false);
@@ -64,11 +64,11 @@ public class BlackjackSolitaire {
         for (int j = 0; j < gameBoard[0].length; j++) {
             int handScore = 0;
             for (int i = 0; i < gameBoard.length; i++) {
-                if (gameBoard[i][j] == null) {
+                if (gameBoard[i][j] == null) { // allow for mud game score report
                     continue;
-                } else if (((i == gameBoard.length - 1 || i == gameBoard.length - 2)) && ((j == gameBoard[0].length - 1) || (j == 0))) {
+                } else if (((i == gameBoard.length - 1 || i == gameBoard.length - 2)) && ((j == gameBoard[0].length - 1) || (j == 0))) { // ignore discard pile
                     continue;
-                } else if (gameBoard[i][j].getValue() == 1) {
+                } else if (gameBoard[i][j].getValue() == 1) { // account for aces (automatically make first ace worth 11, and any additional in row worth one, while tracking number of aces in the row)
                     if (aceCount == 0 && handScore <= 10) {
                         aceCount++;
                         handScore += 11;
@@ -79,7 +79,7 @@ public class BlackjackSolitaire {
                     handScore += gameBoard[i][j].getValue();
                 }
             }
-            if (handScore > 21 && aceCount >= 1) {
+            if (handScore > 21 && aceCount >= 1) { // if the score is a bust and we had 1 or more aces, subtract 10 from hand sum to set the first ace value to 1
                 handScore -= 10;
             }
             if (j == 0 || j == 4) {
@@ -153,6 +153,9 @@ public class BlackjackSolitaire {
         while (!this.isBoardFull()) {
             Card topCard = deck.getTopCard();
             System.out.println();
+            System.out.println();
+            System.out.println("Current Score: " + this.sumScore());
+            System.out.println("Discards remaining: " + disCards);
             System.out.println("Game Board:");
             this.board.printBoard();
             System.out.println("Discard Board:");
@@ -170,19 +173,17 @@ public class BlackjackSolitaire {
                     tilePlaced = this.board.discardCard(tile, topCard);
                     if (tilePlaced) {
                         disCards--;
-                        System.out.println("Discards remaining: " + disCards);
                     }
                 } else {
                     System.out.println("Invalid tile number, please reference board and try again.");
                 }
-                System.out.println("Current Score: " + this.sumScore());
 
             } while (!tilePlaced);
 
         }
 
         int gameScore = this.sumScore();
-
+        System.out.println();
         System.out.println("Final Game Board:");
         this.board.printBoard();
         System.out.println("\nGame has finished!\nGame Score: " + gameScore);
