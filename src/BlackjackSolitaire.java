@@ -32,7 +32,7 @@ public class BlackjackSolitaire {
 
         int gameSum = 0;
         int aceCount = 0;
-        Card[][] gameBoard = board.getBoard();
+        Card[][] gameBoard = this.board.getBoard();
 
         // Row hand scores
         for (int i = 0; i < gameBoard.length; i++) {
@@ -107,7 +107,7 @@ public class BlackjackSolitaire {
             return 7;
         } else if (handScore > 16 && handScore < 21) {
             return handScore - 15;
-        } else if (handScore <= 16) {
+        } else if (handScore <= 16 && handScore > 0) {
             return 1;
         } else {
             return 0;
@@ -146,36 +146,28 @@ public class BlackjackSolitaire {
         this.board.printBoard();
         System.out.println("Discard Board:");
         this.board.printDiscard();
-        System.out.println("\nThere are two boards above: the Playing Board, and the Discard Board. Each board is \n" +
-                "labeled with a number indicating a position on either board. When presented with a new card, \n" +
-                "a player has two choice: to play the card, or to discard the card. A player must (when prompted)\n" +
-                "the space they want to play (or discard) the card too. Depending on the action chosen, the game\n" +
-                "will either confirm that the card can be played, or inform the player that there move is invalid \n" +
-                "and they must choose a new action. The goal of the game is to place (or discard) each new card \n" +
-                "presented, trying to get a sum of 21 on any row or column of the game board. The game ends only\n" +
-                "when the board is completely filled. A player gets a total of four discards per game (represented \n" +
-                "by the 2x2 discard grid). When you are ready, hit enter to start!\n\n\n"
+        System.out.println("When you are ready, hit enter to start!\n\n\n"
         );
         sc.nextLine();
         int disCards = 4;
         while (!this.isBoardFull()) {
             Card topCard = deck.getTopCard();
             System.out.println();
-            System.out.println("Drawn Card: " + topCard.toString());
             System.out.println("Game Board:");
-            board.printBoard();
+            this.board.printBoard();
             System.out.println("Discard Board:");
-            board.printDiscard();
-
+            this.board.printDiscard();
+            System.out.println();
+            System.out.println("Drawn Card: " + topCard.toString());
             boolean tilePlaced = false;
 
             do {
-                System.out.println("Please select the tile you would like to play the drawn card on (1-16 on the game board, 17-20 for discard): ");
+                System.out.println("Please select action for drawn card (1-16 on the game board, 17-20 for discard): ");
                 int tile = sc.nextInt();
                 if (tile >= 1 && tile <= 16) {
-                    tilePlaced = board.placeCard(tile, topCard);
+                    tilePlaced = this.board.placeCard(tile, topCard);
                 } else if (tile >= 17 && tile <= 20) {
-                    tilePlaced = board.discardCard(tile, topCard);
+                    tilePlaced = this.board.discardCard(tile, topCard);
                     if (tilePlaced) {
                         disCards--;
                         System.out.println("Discards remaining: " + disCards);
@@ -183,16 +175,16 @@ public class BlackjackSolitaire {
                 } else {
                     System.out.println("Invalid tile number, please reference board and try again.");
                 }
-                System.out.println();
+                System.out.println("Current Score: " + this.sumScore());
 
             } while (!tilePlaced);
 
         }
 
-        int gameScore = sumScore();
+        int gameScore = this.sumScore();
 
         System.out.println("Final Game Board:");
-        board.printBoard();
+        this.board.printBoard();
         System.out.println("\nGame has finished!\nGame Score: " + gameScore);
 
 

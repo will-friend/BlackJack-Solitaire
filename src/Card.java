@@ -64,7 +64,7 @@ public class Card {
      */
     public String toString() {
         if (this.rank < 10 && this.rank > 1) {
-            return this.rank + this.suit.substring(0,1);
+            return this.rank + this.suit.substring(0,1); // Substring instead of charAt for string concatenation
         } else if (this.rank == 1) {
             return "A" + this.suit.charAt(0);
         } else if (this.rank == 11) {
@@ -106,11 +106,11 @@ public class Card {
         Test(expectedC4Value==actualC4Value);
         Test(expectedC5Value==actualC5Value);
 
-        System.out.println(c1.toString());
-        System.out.println(c2.toString());
-        System.out.println(c3.toString());
-        System.out.println(c4.toString());
-        System.out.println(c5.toString());
+        Test(c1.toString().equals("AH"));
+        Test(c2.toString().equals("QC"));
+        Test(c3.toString().equals("4D"));
+        Test(c4.toString().equals("JS"));
+        Test(c5.toString().equals("AC"));
 
     }
 

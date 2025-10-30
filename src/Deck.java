@@ -90,4 +90,12 @@ public class Deck {
         System.out.println("Top card: " + deck.getTopCard());
     }
 
+    public static void Test(boolean test) {
+        if (test) {
+            System.out.println("TEST PASSED");
+        } else {
+            System.out.println("TEST FAILED");
+        }
+    }
+
 }
