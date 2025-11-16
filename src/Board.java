@@ -133,6 +133,11 @@ public class Board {
             return false;
         }
 
+        if (board[row][col] != null) {
+            System.out.println("Card already discarded in this slot, please choose another spot.");
+            return false;
+        }
+
         if ((row == 2 || row == 3) && (col == 0 || col == 4)) {
             this.board[row][col] = card;
             return true;

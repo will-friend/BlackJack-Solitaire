@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.*;
 
 /**
  * Class defining the blackjack solitaire game
@@ -22,6 +23,10 @@ public class BlackjackSolitaire {
         this.deck = new Deck();
         this.deck.shuffleDeck();
         this.board = new Board();
+    }
+
+    public Deck getDeck() {
+        return deck;
     }
 
     /**
@@ -170,10 +175,16 @@ public class BlackjackSolitaire {
                 if (tile >= 1 && tile <= 16) {
                     tilePlaced = this.board.placeCard(tile, topCard);
                 } else if (tile >= 17 && tile <= 20) {
-                    tilePlaced = this.board.discardCard(tile, topCard);
-                    if (tilePlaced) {
-                        disCards--;
+                    if (disCards > 0) {
+                        tilePlaced = this.board.discardCard(tile, topCard);
+                        if (tilePlaced) {
+                            disCards--;
+                        }
+                    } else {
+                        tilePlaced = false;
+                        System.out.println("No more discards left!");
                     }
+
                 } else {
                     System.out.println("Invalid tile number, please reference board and try again.");
                 }
@@ -189,6 +200,15 @@ public class BlackjackSolitaire {
         System.out.println("\nGame has finished!\nGame Score: " + gameScore);
 
 
+
+    }
+
+    public static void main(String[] args) {
+        BlackjackSolitaire bj = new BlackjackSolitaire();
+        HashSet<Card> set = new HashSet<>(bj.getDeck().getCards());
+        Card top = bj.getDeck().getTopCard();
+        set.remove(top);
+        System.out.println(set.size());
 
     }
 

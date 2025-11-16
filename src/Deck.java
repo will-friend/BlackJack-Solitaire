@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.*;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  *  Class that defines a regular deck of cards, and actions that can
@@ -76,18 +78,21 @@ public class Deck {
         Deck deck = new Deck();
         ArrayList<Card> cards = deck.getCards();
 
-        System.out.println("Pre-Shuffle deck");
-        for (Card card : cards) {
-            System.out.println(card.toString());
-        }
+        System.out.println(cards);
 
-        deck.shuffleDeck();
-        System.out.println("Post-Shuffle deck");
-        cards = deck.getCards();
-        for (Card card : cards) {
-            System.out.println(card.toString());
-        }
-        System.out.println("Top card: " + deck.getTopCard());
+        Card card = deck.getTopCard();
+
+        System.out.println(card.toString());
+        System.out.println(cards);
+
+
+//        deck.shuffleDeck();
+//        System.out.println("Post-Shuffle deck");
+//        cards = deck.getCards();
+//        for (Card card : cards) {
+//            System.out.println(card.toString());
+//        }
+//        System.out.println("Top card: " + deck.getTopCard());
     }
 
     public static void Test(boolean test) {
